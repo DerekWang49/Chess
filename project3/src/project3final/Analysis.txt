@@ -1,0 +1,13 @@
+ArrayList Runtime of get(int index) method: O(n) complexity
+LinkedList Runtime of get(int index) method: O(n) complexity
+The array has a time complexity of O(n) because the element is searched until the inputed index is reached
+The linked list has a time complexity of O(n) because the for loop ends when it reaches the index.
+
+Rotate (incomplete)
+
+ArrayList Runtime of merge(List<T>otherList) method: O(n) complexity
+There is only one for loop for the method and it depends on the length of the combined list
+
+ArrayList Runtime of reverse(): O(n) complexity
+Even though the for loop only runs for half the size of the list, it is still O(n) complexity because it is linearly
+dependent on the size of the list

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/allElse/allElse.iml" filepath="$PROJECT_DIR$/allElse/allElse.iml" />
+      <module fileurl="file://$PROJECT_DIR$/csci1933.iml" filepath="$PROJECT_DIR$/csci1933.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lab4/lab4.iml" filepath="$PROJECT_DIR$/lab4/lab4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lab4real/lab4real.iml" filepath="$PROJECT_DIR$/lab4real/lab4real.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lab4/lab4test/lab4test.iml" filepath="$PROJECT_DIR$/lab4/lab4test/lab4test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lab5/lab5.iml" filepath="$PROJECT_DIR$/lab5/lab5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project1/project1.iml" filepath="$PROJECT_DIR$/project1/project1.iml" />
+    </modules>
+  </component>
+</project>
