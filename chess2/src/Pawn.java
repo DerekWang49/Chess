@@ -42,7 +42,6 @@ public class Pawn {
             } else {
                 // Check for en passant
                 if (this.isBlack && board.getPiece(endRow - 1, endCol).getCharacter() == '\u2659') {
-                    System.out.println("Test");
                     return true;
                 }
                 else if (!this.isBlack && board.getPiece(endRow + 1, endCol).getCharacter() == '\u265f') {
