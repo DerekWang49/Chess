@@ -24,8 +24,16 @@ public class Pawn {
             // Case 1: Forward movement to empty square.
             // Determine if the distance being moved is valid.
             if (this.isBlack) {
+                if ((endRow == this.row + 2) && (this.row == 1)) {
+                    // board.setPawnTwoSpace(true);
+                    twoSpace = true;
+                }
                 return (endRow == this.row + 1) || ((endRow == this.row + 2) && (this.row == 1));
             } else {
+                if ((endRow == this.row - 2) && (this.row == 6)) {
+                    // board.setPawnTwoSpace(true);
+                    twoSpace = true;
+                }
                 return (endRow == this.row - 1) || ((endRow == this.row - 2) && (this.row == 6));
             }
         } else if (this.col == endCol+1 || this.col == endCol-1) {
@@ -41,13 +49,15 @@ public class Pawn {
                 }
             } else {
                 // Check for en passant
-                if (this.isBlack && board.getPiece(endRow - 1, endCol).getCharacter() == '\u2659') {
-                    board.setEnPassant(true);
+                if (this.isBlack && board.getPiece(endRow - 1, endCol).getCharacter() == '\u2659'
+                        && board.getTempEnPassant()) {
+                    board.setEnPassantAdjustment(true);
                     board.movePiece(endRow - 1, endCol, endRow, endCol);
                     return true;
                 }
-                else if (!this.isBlack && board.getPiece(endRow + 1, endCol).getCharacter() == '\u265f') {
-                    board.setEnPassant(true);
+                else if (!this.isBlack && board.getPiece(endRow + 1, endCol).getCharacter() == '\u265f'
+                        && board.getTempEnPassant()) {
+                    board.setEnPassantAdjustment(true);
                     board.movePiece(endRow + 1, endCol, endRow, endCol);
                     return true;
                 }
@@ -64,6 +74,5 @@ public class Pawn {
     private int row;
     private int col;
     private boolean isBlack;
-    private boolean enPassant;
-
+    private boolean twoSpace = false;
 }

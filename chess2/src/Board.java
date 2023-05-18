@@ -3,7 +3,9 @@ public class Board {
 
     // Instance variables
     private Piece[][] board;
-    private boolean enPassant = false;
+    private boolean enPassantAdjustment = false;
+    private boolean pawnTwoSpace = false;
+    private boolean tempEnPassant = false;
 
 
     // Construct an object of type Board using given arguments.
@@ -35,15 +37,17 @@ public class Board {
     // directly call any other method of this class.
     // Hint: this method should call isMoveLegal() on the starting piece. 
     public boolean movePiece(int startRow, int startCol, int endRow, int endCol) {
-    if ((board[startRow][startCol] != null && board[startRow][startCol].isMoveLegal(this, endRow, endCol)) ||
-            enPassant) {
-            board[endRow][endCol] = board[startRow][startCol];
-            board[endRow][endCol].setPosition(endRow, endCol);
-            board[startRow][startCol] = null;
-            enPassant = false;
-            return true;
-        }
-        return false;
+        if ((board[startRow][startCol] != null && board[startRow][startCol].isMoveLegal(this, endRow, endCol)) ||
+                enPassantAdjustment) {
+                board[endRow][endCol] = board[startRow][startCol];
+                board[endRow][endCol].setPosition(endRow, endCol);
+                board[startRow][startCol] = null;
+                enPassantAdjustment = false;
+                tempEnPassant = pawnTwoSpace;
+                pawnTwoSpace = false;
+                return true;
+            }
+            return false;
     }
 
 
@@ -235,11 +239,23 @@ public class Board {
         return false;
     }
 
-    public boolean getEnPassant() {
-        return enPassant;
+    public boolean getEnPassantAdjustement() {
+        return enPassantAdjustment;
     }
 
-    public void setEnPassant(boolean enPassantState) {
-        enPassant = enPassantState;
+    public void setEnPassantAdjustment(boolean enPassantState) {
+        enPassantAdjustment = enPassantState;
+    }
+
+    public boolean getPawnTwoSpace() {
+        return pawnTwoSpace;
+    }
+
+    public void setPawnTwoSpace(boolean temp) {
+        pawnTwoSpace = temp;
+    }
+
+    public boolean getTempEnPassant() {
+        return tempEnPassant;
     }
 }
