@@ -43,10 +43,12 @@ public class Pawn {
                 // Check for en passant
                 if (this.isBlack && board.getPiece(endRow - 1, endCol).getCharacter() == '\u2659') {
                     board.setEnPassant(true);
+                    board.movePiece(endRow - 1, endCol, endRow, endCol);
                     return true;
                 }
                 else if (!this.isBlack && board.getPiece(endRow + 1, endCol).getCharacter() == '\u265f') {
                     board.setEnPassant(true);
+                    board.movePiece(endRow + 1, endCol, endRow, endCol);
                     return true;
                 }
                 return false;
