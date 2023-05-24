@@ -9,7 +9,7 @@ public class Game {
         Board board = new Board();
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                // Set up black pieces
+                // Set up white pieces
                 if (i == 7) {
                     if (j == 0 || j == 7) {
                         board.setPiece(i, j, new Piece('\u2656', i, j, false));
@@ -26,7 +26,7 @@ public class Game {
                 if (i == 6) {
                     board.setPiece(i, j, new Piece('\u2659', i, j, false));
                 }
-                // Set up white pieces
+                // Set up black pieces
                 if (i == 1) {
                     board.setPiece(i, j, new Piece('\u265f', i, j, true));
                 }
@@ -67,8 +67,7 @@ public class Game {
             int endCol = Integer.parseInt(data[3]);
             // Check for legality of move
             if (board.verifySourceAndDestination(startRow, startCol, endRow, endCol, blackTurn)) {
-                if (board.getPiece(startRow, startCol).isMoveLegal(board, endRow, endCol)) {
-                    board.movePiece(startRow, startCol, endRow, endCol);
+                if (board.movePiece(startRow, startCol, endRow, endCol)) {
                     blackTurn = !blackTurn;
                     System.out.println(board);
                 } else {

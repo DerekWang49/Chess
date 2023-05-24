@@ -25,14 +25,12 @@ public class Pawn {
             // Determine if the distance being moved is valid.
             if (this.isBlack) {
                 if ((endRow == this.row + 2) && (this.row == 1)) {
-                    // board.setPawnTwoSpace(true);
-                    twoSpace = true;
+                     board.getPiece(row, col).setTwoSpace(true);
                 }
                 return (endRow == this.row + 1) || ((endRow == this.row + 2) && (this.row == 1));
             } else {
                 if ((endRow == this.row - 2) && (this.row == 6)) {
-                    // board.setPawnTwoSpace(true);
-                    twoSpace = true;
+                    board.getPiece(row, col).setTwoSpace(true);
                 }
                 return (endRow == this.row - 1) || ((endRow == this.row - 2) && (this.row == 6));
             }
@@ -49,17 +47,26 @@ public class Pawn {
                 }
             } else {
                 // Check for en passant
-                if (this.isBlack && board.getPiece(endRow - 1, endCol).getCharacter() == '\u2659'
-                        && board.getTempEnPassant()) {
-                    board.setEnPassantAdjustment(true);
-                    board.movePiece(endRow - 1, endCol, endRow, endCol);
-                    return true;
-                }
-                else if (!this.isBlack && board.getPiece(endRow + 1, endCol).getCharacter() == '\u265f'
-                        && board.getTempEnPassant()) {
-                    board.setEnPassantAdjustment(true);
-                    board.movePiece(endRow + 1, endCol, endRow, endCol);
-                    return true;
+                if (this.isBlack && board.getPiece(endRow - 1, endCol) != null) {
+                    if (this.isBlack && board.getPiece(endRow - 1, endCol).getCharacter() == '\u2659'
+                            &&
+                            board.getPiece(endRow - 1, endCol).getTwoSpace()
+                    ) {
+                        return true;
+                    }
+                } else if (!this.isBlack && board.getPiece(endRow + 1, endCol) != null) {
+                    if (!this.isBlack && board.getPiece(endRow + 1, endCol).getCharacter() == '\u265f'
+                            &&
+                            board.getPiece(endRow + 1, endCol).getTwoSpace()
+                    ) {
+//                    board.setEnPassantAdjustment(true);
+//                    board.movePiece(endRow + 1, endCol, endRow, endCol);
+//                    board.setTempEnPassant(false);
+//                    board.getPiece(endRow + 1, endCol).setPosition(endRow, endCol);
+//                        board.setTempEnPassant(true);
+//                        board.getPiece(endRow + 1, endCol).setTwoSpace(false);
+                        return true;
+                    }
                 }
                 return false;
             }
@@ -74,5 +81,4 @@ public class Pawn {
     private int row;
     private int col;
     private boolean isBlack;
-    private boolean twoSpace = false;
 }

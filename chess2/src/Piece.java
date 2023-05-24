@@ -7,7 +7,7 @@ public class Piece {
     private int row;
     private int col;
     private boolean isBlack;
-    private boolean enPassant;
+    private boolean twoSpace;
 
     /**
      * Constructor.
@@ -136,12 +136,12 @@ public class Piece {
         return this.character == other.character;
     }
 
-    public boolean getEnPassant() {
-        return enPassant;
+    public boolean getTwoSpace() {
+        return twoSpace;
     }
 
-    public void setEnPassant(boolean pawn) {
-        enPassant = pawn;
+    public void setTwoSpace(boolean pawn) {
+        twoSpace = pawn;
     }
     /**
      * Returns a string representation of the piece.

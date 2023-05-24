@@ -4,8 +4,10 @@ public class Board {
     // Instance variables
     private Piece[][] board;
     private boolean enPassantAdjustment = false;
-    private boolean pawnTwoSpace = false;
+//    private boolean pawnTwoSpace = false;
     private boolean tempEnPassant = false;
+    private Piece enPassantPawn = null;
+
 
 
     // Construct an object of type Board using given arguments.
@@ -37,16 +39,32 @@ public class Board {
     // directly call any other method of this class.
     // Hint: this method should call isMoveLegal() on the starting piece. 
     public boolean movePiece(int startRow, int startCol, int endRow, int endCol) {
-        if ((board[startRow][startCol] != null && board[startRow][startCol].isMoveLegal(this, endRow, endCol)) ||
-                enPassantAdjustment) {
-                board[endRow][endCol] = board[startRow][startCol];
-                board[endRow][endCol].setPosition(endRow, endCol);
-                board[startRow][startCol] = null;
-                enPassantAdjustment = false;
-                tempEnPassant = pawnTwoSpace;
-                pawnTwoSpace = false;
-                return true;
+        if ((board[startRow][startCol] != null && board[startRow][startCol].isMoveLegal(this, endRow, endCol))) {
+            board[endRow][endCol] = board[startRow][startCol];
+            board[endRow][endCol].setPosition(endRow, endCol);
+            board[startRow][startCol] = null;
+            if (board[endRow][endCol].getTwoSpace()) {
+                tempEnPassant = true;
+                enPassantPawn = board[endRow][endCol];
             }
+            if (board[endRow - 1][endCol] != null) {
+                if (board[endRow - 1][endCol].getTwoSpace() && board[endRow][endCol].getIsBlack()) {
+                    board[endRow - 1][endCol] = null;
+            }
+            }
+            if (board[endRow + 1][endCol] != null) {
+                if (board[endRow + 1][endCol].getTwoSpace() && !board[endRow][endCol].getIsBlack()) {
+                    board[endRow + 1][endCol] = null;
+                }
+            }
+
+            if (!tempEnPassant && enPassantPawn != null) {
+                enPassantPawn.setTwoSpace(false);
+            }
+            tempEnPassant = false;
+            return true;
+            }
+
             return false;
     }
 
@@ -247,15 +265,12 @@ public class Board {
         enPassantAdjustment = enPassantState;
     }
 
-    public boolean getPawnTwoSpace() {
-        return pawnTwoSpace;
-    }
-
-    public void setPawnTwoSpace(boolean temp) {
-        pawnTwoSpace = temp;
-    }
 
     public boolean getTempEnPassant() {
         return tempEnPassant;
+    }
+
+    public void setTempEnPassant(boolean tempEnPassant) {
+        this.tempEnPassant = tempEnPassant;
     }
 }
