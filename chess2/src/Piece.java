@@ -8,6 +8,7 @@ public class Piece {
     private int col;
     private boolean isBlack;
     private boolean twoSpace;
+    private boolean hasMoved = false;
 
     /**
      * Constructor.
@@ -138,6 +139,14 @@ public class Piece {
 
     public boolean getTwoSpace() {
         return twoSpace;
+    }
+
+    public boolean getHasMoved() {
+        return hasMoved;
+    }
+
+    public void setHasMoved(boolean moved) {
+        hasMoved = moved;
     }
 
     public void setTwoSpace(boolean pawn) {

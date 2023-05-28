@@ -42,25 +42,31 @@ public class Board {
         if ((board[startRow][startCol] != null && board[startRow][startCol].isMoveLegal(this, endRow, endCol))) {
             board[endRow][endCol] = board[startRow][startCol];
             board[endRow][endCol].setPosition(endRow, endCol);
+            board[endRow][endCol].setHasMoved(true);
             board[startRow][startCol] = null;
+            // If pawn just moved two spaces, en passant possibilty is active
             if (board[endRow][endCol].getTwoSpace()) {
                 tempEnPassant = true;
                 enPassantPawn = board[endRow][endCol];
             }
+            // Remove en passant pawn in front of captured square for black
             if (board[endRow - 1][endCol] != null) {
                 if (board[endRow - 1][endCol].getTwoSpace() && board[endRow][endCol].getIsBlack()) {
                     board[endRow - 1][endCol] = null;
             }
+
             }
+            // Remove en passant pawn in front of captured square for white
             if (board[endRow + 1][endCol] != null) {
                 if (board[endRow + 1][endCol].getTwoSpace() && !board[endRow][endCol].getIsBlack()) {
                     board[endRow + 1][endCol] = null;
                 }
             }
-
+            // Reset pawn moving two spaces unless en passant possibility is active
             if (!tempEnPassant && enPassantPawn != null) {
                 enPassantPawn.setTwoSpace(false);
             }
+            // Set en passant possiblity to false
             tempEnPassant = false;
             return true;
             }
