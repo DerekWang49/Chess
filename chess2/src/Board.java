@@ -44,6 +44,16 @@ public class Board {
             board[endRow][endCol].setPosition(endRow, endCol);
             board[endRow][endCol].setHasMoved(true);
             board[startRow][startCol] = null;
+            if (board[endRow][endCol].getIsBlack() && board[endRow][endCol].getCharacter() == '\u265f') {
+                if ((endRow == startRow + 2) && (startRow == 1)) {
+                     board[endRow][endCol].setTwoSpace(true);
+                }
+            }
+            else if (!board[endRow][endCol].getIsBlack() && board[endRow][endCol].getCharacter() == '\u2659') {
+                if ((endRow == startRow - 2) && (startRow == 6)) {
+                    board[endRow][endCol].setTwoSpace(true);
+                }
+            }
             // If pawn just moved two spaces, en passant possibilty is active
             if (board[endRow][endCol].getTwoSpace()) {
                 tempEnPassant = true;

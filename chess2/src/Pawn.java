@@ -25,12 +25,12 @@ public class Pawn {
             // Determine if the distance being moved is valid.
             if (this.isBlack) {
                 if ((endRow == this.row + 2) && (this.row == 1)) {
-                     board.getPiece(row, col).setTwoSpace(true);
+//                     board.getPiece(row, col).setTwoSpace(true);
                 }
                 return (endRow == this.row + 1) || ((endRow == this.row + 2) && (this.row == 1));
             } else {
                 if ((endRow == this.row - 2) && (this.row == 6)) {
-                    board.getPiece(row, col).setTwoSpace(true);
+//                    board.getPiece(row, col).setTwoSpace(true);
                 }
                 return (endRow == this.row - 1) || ((endRow == this.row - 2) && (this.row == 6));
             }
